@@ -20,7 +20,38 @@ public class JokeService {
         return jokeRepository.findById(id);
     }
 
+    public List<Joke> findAllJokes() {
+        return jokeRepository.findAll();
+    }
+
     public List<Joke> findByRating(String rating) {
         return jokeRepository.findByRating(rating);
+    }
+
+    public Joke updateJoke(Joke joke) {
+        return jokeRepository.save(joke);
+    }
+
+    public Optional<Joke> patchJoke(String id, Joke joke) {
+        /*
+        Optional<Joke> optionalJoke = jokeRepository.findById(id);
+        if (optionalJoke.isPresent()) {
+            Joke jokeFromDatabase = optionalJoke.get();
+            if (joke.getJoke() != null) {
+                jokeFromDatabase.setJoke(joke.getJoke());
+            }
+
+            if (joke.getRating() != null) {
+                jokeFromDatabase.setRating(joke.getRating());
+            }
+            return Optional.of(jokeRepository.save(jokeFromDatabase));
+        } else {
+            return Optional.empty();
+        }
+         */
+
+        return jokeRepository.findById(id)
+                .map(j -> j.patch(joke))
+                .map(j -> jokeRepository.save(j));
     }
 }

@@ -23,9 +23,24 @@ public class JokeContoller {
         return ResponseEntity.of(jokeService.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public List<Joke> findJokesByRating(@RequestParam String rating) {
         return jokeService.findByRating(rating);
     }
 
+    @GetMapping
+    public List<Joke> findAllJokes() {
+        return jokeService.findAllJokes();
+    }
+
+    @PutMapping("/{id}")
+    public Joke updateJoke(@PathVariable String id, @RequestBody Joke joke) {
+        joke.setId(id);
+        return jokeService.updateJoke(joke);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Joke> patchJoke(@PathVariable String id, @RequestBody Joke joke) {
+        return ResponseEntity.of(jokeService.patchJoke(id, joke));
+    }
 }

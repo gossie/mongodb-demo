@@ -13,4 +13,14 @@ public class Joke {
     private String joke;
     private String rating;
 
+    public Joke patch(Joke joke) {
+        if (joke.getJoke() != null) {
+            setJoke(joke.getJoke());
+        }
+
+        if (joke.getRating() != null) {
+            setRating(joke.getRating());
+        }
+        return this;
+    }
 }
