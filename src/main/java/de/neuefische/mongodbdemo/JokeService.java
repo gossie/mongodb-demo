@@ -1,6 +1,7 @@
 package de.neuefische.mongodbdemo;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,5 +56,13 @@ public class JokeService {
         return jokeRepository.findById(id)
                 .map(j -> j.patch(joke))
                 .map(jokeRepository::save);
+    }
+
+    public Optional<Joke> deleteJoke(String id) {
+        return jokeRepository.findById(id)
+                .map(j -> {
+                    jokeRepository.deleteById(id);
+                    return j;
+                });
     }
 }

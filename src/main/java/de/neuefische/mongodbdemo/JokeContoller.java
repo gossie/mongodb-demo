@@ -42,4 +42,9 @@ public class JokeContoller {
     public ResponseEntity<Joke> patchJoke(@PathVariable String id, @RequestBody Joke joke) {
         return ResponseEntity.of(jokeService.patchJoke(id, joke));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Joke> deleteJoke(@PathVariable String id) {
+        return ResponseEntity.of(jokeService.deleteJoke(id));
+    }
 }
