@@ -28,8 +28,10 @@ public class JokeService {
         return jokeRepository.findByRating(rating);
     }
 
-    public Joke updateJoke(Joke joke) {
-        return jokeRepository.save(joke);
+    public Optional<Joke> updateJoke(String id, Joke joke) {
+        return jokeRepository.findById(id)
+                .map(j -> j.update(joke))
+                .map(jokeRepository::save);
     }
 
     public Optional<Joke> patchJoke(String id, Joke joke) {
@@ -52,6 +54,6 @@ public class JokeService {
 
         return jokeRepository.findById(id)
                 .map(j -> j.patch(joke))
-                .map(j -> jokeRepository.save(j));
+                .map(jokeRepository::save);
     }
 }

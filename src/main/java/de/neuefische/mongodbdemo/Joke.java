@@ -23,4 +23,10 @@ public class Joke {
         }
         return this;
     }
+
+    public Joke update(Joke joke) {
+        setJoke(joke.getJoke());
+        setRating(joke.getRating());
+        return this;
+    }
 }

@@ -34,9 +34,8 @@ public class JokeContoller {
     }
 
     @PutMapping("/{id}")
-    public Joke updateJoke(@PathVariable String id, @RequestBody Joke joke) {
-        joke.setId(id);
-        return jokeService.updateJoke(joke);
+    public ResponseEntity<Joke> updateJoke(@PathVariable String id, @RequestBody Joke joke) {
+        return ResponseEntity.of(jokeService.updateJoke(id, joke));
     }
 
     @PatchMapping("/{id}")
